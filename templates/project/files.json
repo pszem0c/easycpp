@@ -1,0 +1,15 @@
+{
+    "directories":[
+        "bin",
+        "include",
+        "lib",
+        "src"
+    ],
+    "templates":{
+        "[G++/GDB] Linux":{
+            "shared/Makefile":"Makefile",
+            "hello-world/main.cpp": "src/main.cpp",
+        },
+    }
+
+}
