@@ -48,11 +48,10 @@ def createClass():
         res = urllib.request.urlopen("{}/templates/classes/files.json".format(baseUrl)) 
         data = json.loads(res.read().decode("utf-8"))
         print("Class templates:")
-        i = 1
-        for c in data:
-            print("{} - {}".format(i,c))
-            i = i + 1
-        selected = list(data.keys())[int(input("Select class[1-{}]: ".format(i-1)))-1]
+        templates = list(data.keys())
+        for i in range(len(templates)):
+            print("{} - {}".format(i+1,templates[i]))
+        selected = list(data.keys())[int(input("Select class[1-{}]: ".format(len(templates))))-1]
         className = input("Enter class name: ")
         if os.path.isfile("Makefile"):
             folder = os.getcwd()
