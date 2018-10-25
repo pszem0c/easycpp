@@ -4,7 +4,7 @@ import json
 import sys
 import os
 
-baseUrl = "https://raw.githubusercontent.com/pszem0c/easycpp/07db17b8caf7be75087f7ce04eed4143e3e4956b"
+baseUrl = "https://raw.githubusercontent.com/pszem0c/easycpp/master"
 
 def createProject():
     try:
@@ -26,15 +26,13 @@ def selectFolderAndDownload(files, templateName):
 
 def downloadTemplate(files, templateName, folder):
     try:
-        #for directory in files["directories"]:
-        #    os.mkdir("{}/{}".format(folder, directory))
+        for directory in files["directories"]:
+            os.mkdir("{}/{}".format(folder, directory))
         for f in files["templates"][templateName]:
-            print(f)
-
+            res = urllib.request.urlopen("{}/templates/project/{}".format(baseUrl, f))
+            open("{}/{}".format(folder, files["templates"][templateName][f]), "wb").write(res.read())
     except:
         print(" download: {}".format(sys.exc_info()[0]))
-
-
 
 if __name__ == "__main__":
     createProject()
