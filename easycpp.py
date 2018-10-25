@@ -3,7 +3,9 @@ import urllib.request
 import json
 import sys
 import os
+import argparse
 
+args = None
 baseUrl = "https://raw.githubusercontent.com/pszem0c/easycpp/master"
 
 def createProject():
@@ -19,8 +21,15 @@ def createProject():
 
 def selectFolderAndDownload(files, templateName):
     try:
-        # other dirs?
-        downloadTemplate(files, templateName, os.getcwd())
+        if args.dir != None:
+            folder = ""
+            if os.path.isabs(args.dir):
+                folder = args.dir
+            else:
+                folder = "{}/{}".format(os.getcwd(), args.dir)
+            downloadTemplate(files, templateName, folder)
+        else:
+            downloadTemplate(files, templateName, os.getcwd)
     except:
         print("folder and download: {}".format(sys.exc_info()[0]))
 
@@ -34,5 +43,18 @@ def downloadTemplate(files, templateName, folder):
     except:
         print(" download: {}".format(sys.exc_info()[0]))
 
+def createClass():
+    
+
 if __name__ == "__main__":
-    createProject()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--project", help="creates new project", action="store_true")
+    parser.add_argument("-d", "--dir", help="directory where new project will be created", action="store", dest="dir")
+    parser.add_argument("-c", "--class", help="creates class", action="store_true", dest="createClass")
+    args = parser.parse_args()
+    if args.project:
+        print("Creating easycpp project")
+        #createProject()
+    elif args.createClass:
+        print("Creating class")
+        createClass()
