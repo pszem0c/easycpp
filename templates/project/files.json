@@ -8,8 +8,8 @@
     "templates":{
         "[G++/GDB] Linux":{
             "shared/Makefile":"Makefile",
-            "hello-world/main.cpp": "src/main.cpp",
-        },
+            "hello-world/main.cpp": "src/main.cpp"
+        }
     }
 
 }
